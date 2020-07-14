@@ -31,9 +31,15 @@ const getArrayLength = (projects) => {
   }
 };
 
+const getDueDate = (date) => {
+  if (date == "") return null;
+  return moment(date).format("MMM D, YYYY");
+};
+
 export default {
   getUserFullName,
   getCreationDate,
   getCardName,
   getCustomerProjectsRow,
+  getDueDate,
 };

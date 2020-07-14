@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView, DatePickerAndroid } from "react-native";
 import * as Yup from "yup";
 
-import {
-  Form,
-  FormField,
-  FormPicker as Picker,
-  SubmitButton,
-} from "../components/forms";
+import { Form, FormField, SubmitButton } from "../components/forms";
 import Screen from "../components/Screen";
 import projectsApi from "../api/projects";
 import UploadScreen from "./UploadScreen";
 import AppText from "../components/Text";
 import colors from "../config/colors";
-import { ScrollView } from "react-native-gesture-handler";
+import AppFormDate from "../components/forms/AppformDate";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().min(1).label("Fistname"),
@@ -56,6 +51,7 @@ function ProjectEditScreen() {
             email: "",
             phone: "",
             name: "",
+            dateEnd: "",
           }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
@@ -99,14 +95,8 @@ function ProjectEditScreen() {
           <View style={styles.headerSeparator} />
 
           <FormField maxLength={255} name="name" placeholder="Project name" />
-          {/* <Picker
-          items={categories}
-          name="category"
-          numberOfColumns={3}
-          PickerItemComponent={CategoryPickerItem}
-          placeholder="Category"
-          width="50%"
-        /> */}
+          <AppFormDate name="dateEnd" placeholder="Due date" width="50%" />
+
           <SubmitButton title="Post" />
         </Form>
       </ScrollView>
@@ -131,7 +121,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     marginBottom: 15,
   },
-
   input: {
     width: "100%",
     height: 15,

@@ -9,7 +9,7 @@ export const addProject = (project, onUploadProgress) => {
 
   const data = {
     name: project.name,
-    dateEnd: "2020-07-28",
+    dateEnd: project.dateEnd,
     customer: {
       firstname: project.firstname,
       lastname: project.lastname,
