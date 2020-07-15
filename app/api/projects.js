@@ -5,8 +5,6 @@ const getProjects = (id, search) =>
   client.get(endpoint + "?user=" + id + "&name=" + search);
 
 export const addProject = (project, onUploadProgress) => {
-  console.log(project);
-
   const data = {
     name: project.name,
     dateEnd: project.dateEnd,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ScrollView, DatePickerAndroid } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 
 import { Form, FormField, SubmitButton } from "../components/forms";

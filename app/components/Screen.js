@@ -1,12 +1,16 @@
 import React from "react";
 import Constants from "expo-constants";
+import OfflineNotice from "../components/OfflineNotice";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 
 function Screen({ children, style }) {
   return (
-    <SafeAreaView style={[styles.screen, style]}>
-      <View style={[styles.view, style]}>{children}</View>
-    </SafeAreaView>
+    <>
+      <OfflineNotice />
+      <SafeAreaView style={[styles.screen, style]}>
+        <View style={[styles.view, style]}>{children}</View>
+      </SafeAreaView>
+    </>
   );
 }
 
