@@ -12,14 +12,21 @@ import AppText from "../components/Text";
 import useApi from "../hooks/useApi";
 import Icon from "../components/Icon";
 import utils from "../utils/utils";
+import useAuth from "../auth/useAuth";
 
 function ListingsScreen({ navigation }) {
+  const { user } = useAuth();
   const getProjectsApi = useApi(projectsApi.getProjects);
   const [search, setSearch] = useState("");
+  const [launchSearch, setLauchSearch] = useState(false);
 
   useEffect(() => {
-    getProjectsApi.request(2, search);
-  }, [search]);
+    getProjectsApi.request(user.id, search);
+  }, [search, launchSearch]);
+
+  const refreshSearch = () => {
+    setLauchSearch(!launchSearch);
+  };
 
   return (
     <Screen style={styles.screen}>
@@ -41,6 +48,7 @@ function ListingsScreen({ navigation }) {
           size={35}
           backgroundColor={colors.primary}
           iconColor="#fff"
+          onPress={() => refreshSearch()}
           style={styles.searchIcon}
         ></Icon>
       </View>
@@ -94,6 +102,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 7,
   },
+  IconSearchWrap: { backgroundColor: "red" },
   viewContainer: {
     flex: 1,
     flexDirection: "column",

@@ -9,11 +9,11 @@ const getCreationDate = (item) => {
 };
 
 const getCardName = (item) => {
-  return item.name + " - " + getUserFullName(item);
+  return item.name + " - " + getUserFullName(item.customer);
 };
 
 const getUserFullName = (item) => {
-  return item.customer.firstname + " " + item.customer.lastname;
+  return item ? item.firstname + " " + item.lastname : null;
 };
 
 const getCustomerProjectsRow = (customer) => {

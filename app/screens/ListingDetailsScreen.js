@@ -40,7 +40,7 @@ function ListingDetailsScreen({ route, navigation }) {
           <View style={styles.userContainer}>
             <ListItem
               image={require("../assets/user_1.jpg")}
-              title={utils.getUserFullName(project)}
+              title={utils.getUserFullName(project.customer)}
               subTitle={utils.getCustomerProjectsRow(customerDetails)}
               style={styles.ListItem}
               onPress={() =>
