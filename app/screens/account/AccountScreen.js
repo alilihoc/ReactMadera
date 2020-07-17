@@ -1,32 +1,34 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
-import { ListItem, ListItemSeparator } from "../components/lists";
-import colors from "../config/colors";
-import Icon from "../components/Icon";
-import routes from "../navigation/routes";
-import Screen from "../components/Screen";
-import useAuth from "../auth/useAuth";
-import utils from "../utils/utils";
+import { ListItem, ListItemSeparator } from "../../components/lists";
+import colors from "../../config/colors";
+import Icon from "../../components/Icon";
+import routes from "../../navigation/routes";
+import Screen from "../../components/Screen";
+import useAuth from "../../auth/useAuth";
+import utils from "../../utils/utils";
 
 const menuItems = [
   {
-    title: "My projects",
+    title: "Projects",
     icon: {
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
-    targetScreen: "Feed",
+    targetStack: "Feed",
+    targetScreen: routes.LISTING_PROJECTS,
   },
   {
-    title: "My customers",
+    title: "Customers",
     icon: {
       name: "account-group",
       backgroundColor: "#4b7bec",
     },
+    targetScreen: routes.MY_CUSTOMERS,
   },
   {
-    title: "My Messages",
+    title: "Messages",
     icon: {
       name: "email",
       backgroundColor: colors.secondary,
@@ -44,7 +46,8 @@ function AccountScreen({ navigation }) {
         <ListItem
           title={utils.getUserFullName(user)}
           subTitle={user.email}
-          image={require("../assets/hocine.jpg")}
+          image={require("../../assets/hocine.jpg")}
+          onPress={() => navigation.navigate(routes.USER_INFOS, user)}
         />
       </View>
       <View style={styles.container}>
@@ -61,7 +64,7 @@ function AccountScreen({ navigation }) {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
-              onPress={() => navigation.navigate(item.targetScreen)}
+              onPress={() => handleNavigation(navigation, item)}
             />
           )}
         />
@@ -74,6 +77,17 @@ function AccountScreen({ navigation }) {
     </Screen>
   );
 }
+
+const handleNavigation = (navigation, item) => {
+  switch (item.targetScreen) {
+    case routes.LISTING_PROJECTS:
+      return navigation.navigate(item.targetStack, {
+        screen: item.targetScreen,
+      });
+    default:
+      return navigation.navigate(item.targetScreen);
+  }
+};
 
 const styles = StyleSheet.create({
   screen: {

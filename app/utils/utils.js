@@ -16,8 +16,8 @@ const getUserFullName = (item) => {
   return item ? item.firstname + " " + item.lastname : null;
 };
 
-const getCustomerProjectsRow = (customer) => {
-  let nbProjects = getArrayLength(customer.projects);
+const getNbProjectsRow = (projects) => {
+  let nbProjects = getArrayLength(projects);
   let isPlural = true;
   if (nbProjects == 1) {
     isPlural = false;
@@ -40,6 +40,6 @@ export default {
   getUserFullName,
   getCreationDate,
   getCardName,
-  getCustomerProjectsRow,
+  getNbProjectsRow,
   getDueDate,
 };

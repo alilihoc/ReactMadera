@@ -41,10 +41,10 @@ function ListingDetailsScreen({ route, navigation }) {
             <ListItem
               image={require("../assets/user_1.jpg")}
               title={utils.getUserFullName(project.customer)}
-              subTitle={utils.getCustomerProjectsRow(customerDetails)}
+              subTitle={utils.getNbProjectsRow(customerDetails.projects)}
               style={styles.ListItem}
               onPress={() =>
-                navigation.navigate(routes.CUSTOMER_DETAILs, customerDetails)
+                navigation.navigate(routes.CUSTOMER_DETAILs, customerDetails.id)
               }
             />
           </View>

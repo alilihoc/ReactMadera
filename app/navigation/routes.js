@@ -7,4 +7,6 @@ export default Object.freeze({
   CUSTOMER_DETAILs: "Customer",
   CUSTOMER_PROJECTS: "CustomerProjects",
   LISTING_PROJECTS: "Projects",
+  USER_INFOS: "UserInfos",
+  MY_CUSTOMERS: "MyCustomers",
 });

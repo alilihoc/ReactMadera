@@ -18,14 +18,13 @@ function ListingsScreen({ navigation }) {
   const { user } = useAuth();
   const getProjectsApi = useApi(projectsApi.getProjects);
   const [search, setSearch] = useState("");
-  const [launchSearch, setLauchSearch] = useState(false);
 
   useEffect(() => {
     getProjectsApi.request(user.id, search);
-  }, [search, launchSearch]);
+  }, [search]);
 
   const refreshSearch = () => {
-    setLauchSearch(!launchSearch);
+    getProjectsApi.request(user.id, search);
   };
 
   return (
@@ -33,7 +32,7 @@ function ListingsScreen({ navigation }) {
       {getProjectsApi.error && (
         <>
           <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={getProjectsApi.request} />
+          <Button title="Retry" onPress={() => getProjectsApi.request} />
         </>
       )}
       <View style={styles.searchContainer}>

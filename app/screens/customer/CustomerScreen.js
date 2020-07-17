@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import { ListItem, ListItemSeparator } from "../../components/lists";
@@ -7,9 +7,19 @@ import Icon from "../../components/Icon";
 import Screen from "../../components/Screen";
 import utils from "../../utils/utils";
 import routes from "../../navigation/routes";
+import customersApi from "../../api/customers";
+import useApi from "../../hooks/useApi";
+import ActivityIndicator from "../../components/ActivityIndicator";
 
 function CustomerScreen({ route, navigation }) {
-  const customer = route.params;
+  const id = route.params;
+  const getCustomerApi = useApi(customersApi.getCustomer);
+
+  useEffect(() => {
+    getCustomerApi.request(id);
+  }, []);
+
+  const customer = getCustomerApi.data;
   const menuItems = [
     {
       title: "Address",
@@ -31,44 +41,45 @@ function CustomerScreen({ route, navigation }) {
 
   return (
     <Screen style={styles.screen}>
-      <View style={styles.userHeader}>
-        <ListItem
-          title={customer.firstname + " " + customer.lastname}
-          subTitle={customer.email}
-          image={require("../../assets/user_1.jpg")}
-          chevron={false}
-        />
-      </View>
-      <View style={styles.userInformation}>
-        <FlatList
-          data={menuItems}
-          keyExtractor={(menuItem) => menuItem.title}
-          ItemSeparatorComponent={ListItemSeparator}
-          renderItem={({ item }) => (
-            <ListItem
-              title={item.title}
-              subTitle={item.subTitle}
-              IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
-              }
-              chevron={false}
-            />
-          )}
-        />
-      </View>
-      <View style={styles.projectsView}>
-        <ListItem
-          title={utils.getCustomerProjectsRow(customer)}
-          IconComponent={
-            <Icon name="home-group" backgroundColor="#ffe66d" onPress />
-          }
-          onPress={() =>
-            navigation.navigate(routes.CUSTOMER_PROJECTS, customer)
-          }
-        />
+      <ActivityIndicator visible={getCustomerApi.loading} />
+      <View style={{ display: getCustomerApi.loading ? "none" : "flex" }}>
+        <View style={styles.userHeader}>
+          <ListItem
+            title={customer.firstname + " " + customer.lastname}
+            subTitle={customer.email}
+            image={require("../../assets/user_1.jpg")}
+            chevron={false}
+          />
+        </View>
+        <View style={styles.userInformation}>
+          <FlatList
+            data={menuItems}
+            keyExtractor={(menuItem) => menuItem.title}
+            ItemSeparatorComponent={ListItemSeparator}
+            renderItem={({ item }) => (
+              <ListItem
+                title={item.title}
+                subTitle={item.subTitle ? item.subTitle : "Not Specified"}
+                IconComponent={
+                  <Icon
+                    name={item.icon.name}
+                    backgroundColor={item.icon.backgroundColor}
+                  />
+                }
+                chevron={false}
+              />
+            )}
+          />
+        </View>
+        <View style={styles.projectsView}>
+          <ListItem
+            title={utils.getNbProjectsRow(customer.projects)}
+            IconComponent={<Icon name="home-group" backgroundColor="#ffe66d" />}
+            onPress={() =>
+              navigation.navigate(routes.CUSTOMER_PROJECTS, customer)
+            }
+          />
+        </View>
       </View>
     </Screen>
   );
