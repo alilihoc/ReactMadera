@@ -9,4 +9,5 @@ export default Object.freeze({
   LISTING_PROJECTS: "Projects",
   USER_INFOS: "UserInfos",
   MY_CUSTOMERS: "MyCustomers",
+  EDIT_PLAN: "PlanEdit",
 });

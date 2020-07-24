@@ -13,13 +13,15 @@ import Text from "./Text";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
+import CategoryPickerItem from "./CategoryPickerItem";
+import { createPortal } from "react-dom";
 
 function AppPicker({
   icon,
   items,
   numberOfColumns = 1,
   onSelectItem,
-  PickerItemComponent = PickerItem,
+  PickerItemComponent = CategoryPickerItem,
   placeholder,
   selectedItem,
   width = "100%",
@@ -56,7 +58,7 @@ function AppPicker({
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
-            keyExtractor={(item) => item.value.toString()}
+            keyExtractor={(item) => item.id.toString()}
             numColumns={numberOfColumns}
             renderItem={({ item }) => (
               <PickerItemComponent
@@ -65,6 +67,7 @@ function AppPicker({
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item);
+                  console.log("tekjh");
                 }}
               />
             )}

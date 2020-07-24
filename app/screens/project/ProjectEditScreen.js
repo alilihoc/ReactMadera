@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 
-import { Form, FormField, SubmitButton } from "../components/forms";
-import Screen from "../components/Screen";
-import projectsApi from "../api/projects";
-import UploadScreen from "./UploadScreen";
-import AppText from "../components/Text";
-import colors from "../config/colors";
-import AppFormDate from "../components/forms/AppformDate";
+import { Form, FormField, SubmitButton } from "../../components/forms";
+import Screen from "../../components/Screen";
+import projectsApi from "../../api/projects";
+import UploadScreen from "../UploadScreen";
+import AppText from "../../components/Text";
+import colors from "../../config/colors";
+import routes from "../../navigation/routes";
+import AppFormDate from "../../components/forms/AppformDate";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().min(1).label("Fistname"),
@@ -18,7 +19,7 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required().min(1).label("Project name"),
 });
 
-function ProjectEditScreen() {
+function ProjectEditScreen({ navigation }) {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -32,7 +33,8 @@ function ProjectEditScreen() {
       setUploadVisible(false);
       return alert("Could not save the project");
     }
-
+    data = result.data;
+    navigation.navigate(routes.EDIT_PLAN, { id: data.id, name: data.name });
     resetForm();
   };
 

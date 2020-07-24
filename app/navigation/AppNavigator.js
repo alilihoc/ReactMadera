@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
-import ProjectEditScreen from "../screens/ProjectEditScreen";
+import ProjectNavigator from "./ProjectNavigator";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 
@@ -23,7 +23,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="ProjectEdit"
-      component={ProjectEditScreen}
+      component={ProjectNavigator}
       options={({ navigation }) => ({
         tabBarButton: () => (
           <NewListingButton
