@@ -14,7 +14,11 @@ export const addProject = (project, onUploadProgress) => {
       email: project.email,
       phone: project.phone,
     },
-    user: "/api/users/2",
+    user: "/api/users/" + project.user.id,
+    plan: {
+      name: project.name + "'s plan",
+      gamme: "/api/gammes/" + project.gamme.id,
+    },
   };
   return client.post(endpoint, data, {
     onUploadProgress: (progress) =>

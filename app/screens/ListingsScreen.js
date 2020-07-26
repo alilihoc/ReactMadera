@@ -32,7 +32,7 @@ function ListingsScreen({ navigation }) {
       {getProjectsApi.error && (
         <>
           <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={() => getProjectsApi.request} />
+          <Button title="Retry" onPress={refreshSearch} />
         </>
       )}
       <View style={styles.searchContainer}>

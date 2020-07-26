@@ -15,13 +15,14 @@ import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 import CategoryPickerItem from "./CategoryPickerItem";
 import { createPortal } from "react-dom";
+import colors from "../config/colors";
 
 function AppPicker({
   icon,
   items,
   numberOfColumns = 1,
   onSelectItem,
-  PickerItemComponent = CategoryPickerItem,
+  PickerItemComponent = PickerItem,
   placeholder,
   selectedItem,
   width = "100%",
@@ -55,7 +56,11 @@ function AppPicker({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <Button title="Close" onPress={() => setModalVisible(false)} />
+          <Button
+            title="Close"
+            onPress={() => setModalVisible(false)}
+            style={{ backgroundColor: colors.primary, color: "red" }}
+          />
           <FlatList
             data={items}
             keyExtractor={(item) => item.id.toString()}
@@ -67,7 +72,6 @@ function AppPicker({
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item);
-                  console.log("tekjh");
                 }}
               />
             )}

@@ -36,10 +36,15 @@ const getDueDate = (date) => {
   return moment(date).format("MMM D, YYYY");
 };
 
+const parseData = (data) => {
+  retun(data != undefined) ? JSON.parse(data) : null;
+};
+
 export default {
   getUserFullName,
   getCreationDate,
   getCardName,
   getNbProjectsRow,
   getDueDate,
+  parseData,
 };

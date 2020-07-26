@@ -1,69 +1,149 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View, TextInput } from "react-native";
-import * as Yup from "yup";
 
-import {
-  Form,
-  FormField,
-  FormPicker as Picker,
-  SubmitButton,
-} from "../../components/forms";
-import CategoryPickerItem from "../../components/CategoryPickerItem";
-import gammesApi from "../../api/gammes";
 import useApi from "../../hooks/useApi";
-
-const validationSchema = Yup.object().shape({
-  gamme: Yup.object().required().label("Range"),
-});
+import AppButton from "../../components/Button";
+import routes from "../../navigation/routes";
+import AppText from "../../components/Text";
+import plansApi from "../../api/plans";
+import modulessApi from "../../api/modules";
+import ActivityIndicator from "../../components/ActivityIndicator";
+import colors from "../../config/colors";
+import {
+  ListItem,
+  ListItemDeleteAction,
+  ListItemSeparator,
+} from "../../components/lists";
+import Icon from "../../components/Icon";
+import { useIsFocused } from "@react-navigation/native";
 
 function PlanEdit({ route, navigation }) {
-  const [uploadVisible, setUploadVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
-  // const project = route.params;
-  const getGammesApi = useApi(gammesApi.getAlls);
-
-  const handleSubmit = async (project, { resetForm }) => {
-    setProgress(0);
-    setUploadVisible(true);
-    const result = await projectsApi.addProject({ ...project }, (progress) =>
-      setProgress(progress)
-    );
-    if (!result.ok) {
-      setUploadVisible(false);
-      return alert("Could not save the project");
-    }
-    data = result.data;
-    navigation.navigate(routes.EDIT_PLAN, { id: data.id, name: data.name });
-    resetForm();
-  };
+  const [bLoaddind, setBLoading] = useState(false);
+  const project = route.params;
+  const getPlansApi = useApi(plansApi.getPlanById);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    getGammesApi.request();
-  }, []);
+    getPlansApi.request(project.plan.id);
+  }, [isFocused]);
+
+  const handleDelete = async (item) => {
+    setBLoading(true);
+    const result = await modulessApi.deleteModule(item.id);
+
+    if (!result.ok) {
+      setUploadVisible(false);
+      return alert("Could not delete the module");
+    }
+
+    setBLoading(false);
+    getPlansApi.request(project.plan.id);
+  };
 
   return (
-    <View style={styles.container}>
-      <Form
-        initialValues={{
-          gamme: null,
-        }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
+    <>
+      {getPlansApi.error && (
+        <>
+          <AppText>Couldn't retrieve the plan.</AppText>
+          <Button title="Retry" onPress={getPlansApi.request} />
+        </>
+      )}
+
+      <ActivityIndicator visible={getPlansApi.loading || bLoaddind} />
+
+      <View
+        style={[
+          styles.container,
+          { display: getPlansApi.loading || bLoaddind ? "none" : "flex" },
+        ]}
       >
-        <Picker
-          items={getGammesApi.data}
-          name="gamme"
-          numberOfColumns={3}
-          placeholder="Select a range"
-          width="50%"
+        <ListItem
+          title={"Range"}
+          subTitle={getGammeLabel(getPlansApi.data)}
+          chevron={false}
+          IconComponent={
+            <Icon name="chart-pie" backgroundColor={colors.secondary} />
+          }
         />
-      </Form>
-    </View>
+
+        <FlatList
+          data={getPlansApi.data.modules}
+          keyExtractor={(module) => module.id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.name}
+              subTitle={getModuleSubtitle(item)}
+              onPress={() =>
+                navigation.navigate(routes.EDIT_MODULE, {
+                  project: project,
+                  module: item,
+                })
+              }
+              IconComponent={
+                <Icon name="animation-outline" backgroundColor="#4b7bec"></Icon>
+              }
+              renderRightActions={() => (
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              )}
+            />
+          )}
+          ItemSeparatorComponent={ListItemSeparator}
+          style={styles.flatList}
+        />
+
+        <View style={styles.buttonAdd}>
+          <AppButton
+            title={"Add module"}
+            onPress={() =>
+              navigation.navigate(routes.EDIT_MODULE, { project: project })
+            }
+          />
+        </View>
+      </View>
+    </>
   );
 }
 
+const getGammeLabel = (plan) => {
+  return plan.gamme == undefined ? null : plan.gamme.label;
+};
+
+const getModuleSubtitle = (module) => {
+  const type = module.type.label;
+  let price = getItemPrice(module.price);
+
+  return `Type: ${type}\nPrice: ${price} $`;
+};
+
+const getItemPrice = (price) => {
+  var parts = price.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
+};
+
 const styles = StyleSheet.create({
-  container: {},
+  container: { flex: 1, backgroundColor: colors.light },
+  buttonAdd: {
+    flex: 1,
+    justifyContent: "flex-end",
+    marginHorizontal: 10,
+  },
+  formHeader: {
+    fontWeight: "800",
+    fontFamily: "Roboto",
+    marginVertical: 15,
+    marginLeft: 15,
+  },
+  headerSeparator: {
+    width: "100%",
+    height: 1,
+    backgroundColor: colors.light,
+    marginBottom: 15,
+  },
+  flatList: {
+    marginTop: 4,
+    height: 420,
+  },
 });
 
 export default PlanEdit;

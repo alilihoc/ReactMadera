@@ -25,12 +25,11 @@ export default function App() {
     );
 
   return (
-    <PlanEdit></PlanEdit>
-    // <AuthContext.Provider value={{ user, setUser }}>
-    //   <OfflineNotice />
-    //   <NavigationContainer theme={navigationTheme}>
-    //     {user ? <AppNavigator /> : <AuthNavigator />}
-    //   </NavigationContainer>
-    // </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <OfflineNotice />
+      <NavigationContainer theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }

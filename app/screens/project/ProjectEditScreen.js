@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 
-import { Form, FormField, SubmitButton } from "../../components/forms";
+import {
+  Form,
+  FormField,
+  SubmitButton,
+  FormPicker as Picker,
+} from "../../components/forms";
 import Screen from "../../components/Screen";
 import projectsApi from "../../api/projects";
 import UploadScreen from "../UploadScreen";
@@ -10,6 +15,8 @@ import AppText from "../../components/Text";
 import colors from "../../config/colors";
 import routes from "../../navigation/routes";
 import AppFormDate from "../../components/forms/AppformDate";
+import gammesApi from "../../api/gammes";
+import useAuth from "../../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().min(1).label("Fistname"),
@@ -17,24 +24,32 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().required().min(1).label("E-mail"),
   phone: Yup.string().label("Phone number"),
   name: Yup.string().required().min(1).label("Project name"),
+  gamme: Yup.object().nullable().label("Range"),
+  dateEnd: Yup.string().nullable().label("Due date"),
 });
 
 function ProjectEditScreen({ navigation }) {
+  const { user } = useAuth();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
+  const getGammesApi = useApi(gammesApi.getAlls);
+
+  useEffect(() => {
+    getGammesApi.request();
+  }, []);
 
   const handleSubmit = async (project, { resetForm }) => {
     setProgress(0);
     setUploadVisible(true);
-    const result = await projectsApi.addProject({ ...project }, (progress) =>
-      setProgress(progress)
+    const result = await projectsApi.addProject(
+      { ...project, user },
+      (progress) => setProgress(progress)
     );
     if (!result.ok) {
       setUploadVisible(false);
       return alert("Could not save the project");
     }
-    data = result.data;
-    navigation.navigate(routes.EDIT_PLAN, { id: data.id, name: data.name });
+    navigation.navigate(routes.PROJECT_DETAILS, result.data);
     resetForm();
   };
 
@@ -53,6 +68,7 @@ function ProjectEditScreen({ navigation }) {
             email: "",
             phone: "",
             name: "",
+            gamme: null,
             dateEnd: "",
           }}
           onSubmit={handleSubmit}
@@ -97,7 +113,16 @@ function ProjectEditScreen({ navigation }) {
           <View style={styles.headerSeparator} />
 
           <FormField maxLength={255} name="name" placeholder="Project name" />
-          <AppFormDate name="dateEnd" placeholder="Due date" width="50%" />
+          <View style={styles.bottomFields}>
+            <AppFormDate name="dateEnd" placeholder="Due date" width="80%" />
+            <Picker
+              items={getGammesApi.data}
+              name="gamme"
+              numberOfColumns={3}
+              placeholder="Select a range"
+              width="50%"
+            />
+          </View>
 
           <SubmitButton title="Post" />
         </Form>
@@ -126,6 +151,11 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
     height: 15,
+  },
+  bottomFields: {
+    flex: 1,
+    flexDirection: "row",
+    maxHeight: 80,
   },
 });
 export default ProjectEditScreen;

@@ -28,7 +28,7 @@ function AppFormDate({ name, width, placeholder, ...otherProps }) {
         onPress={() => setShow(true)}
         title={showDate ? utils.getDueDate(values[name]) : "Due date"}
         color="secondary"
-        width="50%"
+        width={width}
       />
       {show && (
         <DateTimePicker

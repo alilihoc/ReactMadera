@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import useAuth from "../../auth/useAuth";
-import colors from "../../config/colors";
 import utils from "../../utils/utils";
 import routes from "../../navigation/routes";
 import { ListItem, ListItemSeparator } from "../../components/lists";

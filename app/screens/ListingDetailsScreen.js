@@ -8,14 +8,17 @@ import utils from "../utils/utils";
 import routes from "../navigation/routes";
 import customersApi from "../api/customers";
 import ActivityIndicator from "../components/ActivityIndicator";
+import Icon from "../components/Icon";
+import { useIsFocused } from "@react-navigation/native";
 
 function ListingDetailsScreen({ route, navigation }) {
   const project = route.params;
   const getCustomerApi = useApi(customersApi.getCustomer);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     getCustomerApi.request(project.customer.id);
-  }, []);
+  }, [isFocused]);
 
   const customerDetails = getCustomerApi.data;
 
@@ -35,8 +38,10 @@ function ListingDetailsScreen({ route, navigation }) {
           source={require("../assets/houses/casa_index.jpg")}
         />
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{project.name}</Text>
-          <Text style={styles.date}>{utils.getCreationDate(project)}</Text>
+          <View style={styles.projectInformations}>
+            <Text style={styles.title}>{project.name}</Text>
+            <Text style={styles.date}>{utils.getCreationDate(project)}</Text>
+          </View>
           <View style={styles.userContainer}>
             <ListItem
               image={require("../assets/user_1.jpg")}
@@ -47,6 +52,19 @@ function ListingDetailsScreen({ route, navigation }) {
                 navigation.navigate(routes.CUSTOMER_DETAILs, customerDetails.id)
               }
             />
+            <View style={styles.viewDetail}>
+              <ListItem
+                IconComponent={
+                  <Icon
+                    name="tooltip-edit"
+                    backgroundColor={colors.secondary}
+                  />
+                }
+                title={project.plan.name}
+                subTitle={project.plan.gamme.label}
+                onPress={() => navigation.navigate(routes.EDIT_PLAN, project)}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -56,7 +74,8 @@ function ListingDetailsScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   detailsContainer: {
-    padding: 20,
+    backgroundColor: colors.light,
+    height: 500,
   },
   image: {
     width: "100%",
@@ -68,20 +87,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 0,
   },
-  ListItem: {
-    backgroundColor: colors.red,
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 1,
-  },
   title: {
     fontSize: 28,
     fontWeight: "800",
+  },
+  projectInformations: {
+    padding: 20,
   },
   userContainer: {
     marginVertical: 10,
   },
   username: {
     fontSize: 22,
+  },
+  viewDetail: {
+    marginTop: 20,
   },
 });
 
