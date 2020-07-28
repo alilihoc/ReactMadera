@@ -38,7 +38,6 @@ function ModuleEditScreen({ route, navigation }) {
     );
     if (!result.ok) {
       setUploadVisible(false);
-      console.log(result.data);
       return alert("Could not save the module");
     }
     navigation.navigate(routes.EDIT_PLAN, project);

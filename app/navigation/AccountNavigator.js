@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountScreen from "../screens/account/AccountScreen";
-import ListingsScreen from "../screens/ListingsScreen";
+import ListingsScreen from "../screens/projects/ListingsScreen";
 import MessagesScreen from "../screens/account/MessagesScreen";
 import UserScreen from "../screens/account/UserScreen";
 import CustomersScreen from "../screens/account/CustomersScreen";

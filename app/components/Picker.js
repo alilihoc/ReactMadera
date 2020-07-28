@@ -13,8 +13,6 @@ import Text from "./Text";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
-import CategoryPickerItem from "./CategoryPickerItem";
-import { createPortal } from "react-dom";
 import colors from "../config/colors";
 
 function AppPicker({

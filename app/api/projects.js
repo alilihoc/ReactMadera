@@ -4,6 +4,8 @@ const endpoint = "/projects";
 const getProjects = (id, search) =>
   client.get(endpoint + "?user=" + id + "&name=" + search);
 
+const getProject = (id) => client.get(endpoint + "/" + id);
+
 export const addProject = (project, onUploadProgress) => {
   const data = {
     name: project.name,
@@ -28,4 +30,5 @@ export const addProject = (project, onUploadProgress) => {
 export default {
   getProjects,
   addProject,
+  getProject,
 };

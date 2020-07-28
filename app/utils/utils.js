@@ -37,7 +37,11 @@ const getDueDate = (date) => {
 };
 
 const parseData = (data) => {
-  retun(data != undefined) ? JSON.parse(data) : null;
+  return data != undefined ? JSON.parse(data) : null;
+};
+
+const ctoUpperCase = (string) => {
+  return typeof string == "string" ? string.toUpperCase() : null;
 };
 
 export default {
@@ -47,4 +51,5 @@ export default {
   getNbProjectsRow,
   getDueDate,
   parseData,
+  ctoUpperCase,
 };

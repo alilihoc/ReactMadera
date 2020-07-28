@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View, TextInput } from "react-native";
 
-import ActivityIndicator from "../components/ActivityIndicator";
-import Button from "../components/Button";
-import Card from "../components/Card";
-import colors from "../config/colors";
-import projectsApi from "../api/projects";
-import routes from "../navigation/routes";
-import Screen from "../components/Screen";
-import AppText from "../components/Text";
-import useApi from "../hooks/useApi";
-import Icon from "../components/Icon";
-import utils from "../utils/utils";
-import useAuth from "../auth/useAuth";
+import ActivityIndicator from "../../components/ActivityIndicator";
+import Button from "../../components/Button";
+import Card from "../../components/Card";
+import colors from "../../config/colors";
+import projectsApi from "../../api/projects";
+import routes from "../../navigation/routes";
+import Screen from "../../components/Screen";
+import AppText from "../../components/Text";
+import useApi from "../../hooks/useApi";
+import Icon from "../../components/Icon";
+import utils from "../../utils/utils";
+import useAuth from "../../auth/useAuth";
 
 function ListingsScreen({ navigation }) {
   const { user } = useAuth();
@@ -65,7 +65,7 @@ function ListingsScreen({ navigation }) {
             <Card
               title={utils.getCardName(item)}
               subTitle={utils.getCreationDate(item)}
-              image={require("../assets/houses/casa_index.jpg")}
+              image={require("../../assets/houses/casa_index.jpg")}
               onPress={() => navigation.navigate(routes.PROJECT_DETAILS, item)}
             />
           )}

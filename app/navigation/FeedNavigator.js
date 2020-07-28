@@ -1,11 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ListingsScreen from "../screens/ListingsScreen";
-import ListingDetailsScreen from "../screens/ListingDetailsScreen";
+import ListingsScreen from "../screens/projects/ListingsScreen";
+import ListingDetailsScreen from "../screens/projects/ListingDetailsScreen";
 import CustomerScreen from "../screens/customer/CustomerScreen";
 import CustomerProjects from "../screens/customer/CustomerProjects";
 import PlanEdit from "../screens/project/PlanEdit";
 import ModuleEditScreen from "../screens/project/ModuleEditScreen";
+import QuotationScreen from "../screens/project/QuotationScreen";
 
 const Stack = createStackNavigator();
 
@@ -34,9 +35,17 @@ const FeedNavigator = () => (
     <Stack.Screen
       name="ModuleEdit"
       component={ModuleEditScreen}
-      options={({ route }) => ({
+      options={() => ({
         headerShown: true,
         title: "Add module",
+      })}
+    />
+    <Stack.Screen
+      name="Quotation"
+      component={QuotationScreen}
+      options={() => ({
+        headerShown: true,
+        title: "Quotation",
       })}
     />
   </Stack.Navigator>

@@ -11,4 +11,5 @@ export default Object.freeze({
   MY_CUSTOMERS: "MyCustomers",
   EDIT_PLAN: "PlanEdit",
   EDIT_MODULE: "ModuleEdit",
+  QUOTATION: "Quotation",
 });
