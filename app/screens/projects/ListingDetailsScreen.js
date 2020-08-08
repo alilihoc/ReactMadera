@@ -63,7 +63,7 @@ function ListingDetailsScreen({ route, navigation }) {
             />
             <View style={styles.viewDetail}>
               <FlatList
-                data={getFlatListItems(project)}
+                data={getFlatListItems(projectDetails)}
                 keyExtractor={(menuItem) => menuItem.title}
                 ItemSeparatorComponent={ListItemSeparator}
                 renderItem={({ item }) => (
@@ -74,6 +74,7 @@ function ListingDetailsScreen({ route, navigation }) {
                       <Icon
                         name={item.icon.name}
                         backgroundColor={item.icon.backgroundColor}
+                        iconSize={item.icon.iconSize ? item.icon.iconSize : 1}
                       />
                     }
                     onPress={() =>
@@ -94,12 +95,14 @@ function ListingDetailsScreen({ route, navigation }) {
 }
 
 const getFlatListItems = (project) => {
+  if (project.plan == undefined) return null;
+
   return [
     {
       title: project.plan.name.capitalize(),
       subtitle: project.plan.gamme.label.capitalize(),
       icon: {
-        name: "tooltip-edit",
+        name: "alpha-p",
         backgroundColor: colors.secondary,
       },
       targetScreen: routes.EDIT_PLAN,
@@ -107,9 +110,9 @@ const getFlatListItems = (project) => {
     },
     {
       title: project.plan.quotation.label.capitalize(),
-      subtitle: "State",
+      subtitle: utils.getQuotationState(project.plan.quotation.state),
       icon: {
-        name: "tooltip-edit",
+        name: "alpha-q",
         backgroundColor: "#4b7bec",
       },
       targetScreen: routes.QUOTATION,
@@ -119,8 +122,9 @@ const getFlatListItems = (project) => {
       title: "Payment",
       subtitle: "State",
       icon: {
-        name: "tooltip-edit",
+        name: "credit-card-outline",
         backgroundColor: colors.primary,
+        iconSize: 0.6,
       },
       targetScreen: routes.QUOTATION,
       targetScreenParams: project.plan.quotation.id,

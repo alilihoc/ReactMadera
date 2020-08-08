@@ -15,6 +15,7 @@ import {
   ListItemSeparator,
 } from "../../components/lists";
 import Icon from "../../components/Icon";
+import utils from "../../utils/utils";
 import { useIsFocused } from "@react-navigation/native";
 
 function PlanEdit({ route, navigation }) {
@@ -59,7 +60,7 @@ function PlanEdit({ route, navigation }) {
       >
         <ListItem
           title={"Range"}
-          subTitle={getGammeLabel(getPlansApi.data)}
+          subTitle={utils.getGammeLabel(getPlansApi.data)}
           chevron={false}
           IconComponent={
             <Icon name="chart-pie" backgroundColor={colors.secondary} />
@@ -72,7 +73,7 @@ function PlanEdit({ route, navigation }) {
           renderItem={({ item }) => (
             <ListItem
               title={item.name}
-              subTitle={getModuleSubtitle(item)}
+              subTitle={utils.getModuleSubtitle(item)}
               onPress={() =>
                 navigation.navigate(routes.EDIT_MODULE, {
                   project: project,
@@ -103,23 +104,6 @@ function PlanEdit({ route, navigation }) {
     </>
   );
 }
-
-const getGammeLabel = (plan) => {
-  return plan.gamme == undefined ? null : plan.gamme.label;
-};
-
-const getModuleSubtitle = (module) => {
-  const type = module.type.label;
-  let price = getItemPrice(module.price);
-
-  return `Type: ${type}\nPrice: ${price} $`;
-};
-
-const getItemPrice = (price) => {
-  var parts = price.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return parts.join(".");
-};
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.light },

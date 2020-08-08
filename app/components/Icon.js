@@ -9,6 +9,7 @@ function Icon({
   iconColor = "#fff",
   onPress,
   style,
+  iconSize = 0.5,
 }) {
   return (
     <TouchableWithoutFeedback style={styles.IconSearchWrap} onPress={onPress}>
@@ -28,7 +29,7 @@ function Icon({
         <MaterialCommunityIcons
           name={name}
           color={iconColor}
-          size={size * 0.5}
+          size={size * iconSize}
         />
       </View>
     </TouchableWithoutFeedback>
