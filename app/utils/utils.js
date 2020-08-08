@@ -55,9 +55,9 @@ const getQuotationState = (state) => {
     case 1:
       return "Waiting answer";
     case 2:
-      return "Accepted";
+      return "Declines";
     case 3:
-      return "Declined";
+      return "Accepted";
     default:
       return null;
   }

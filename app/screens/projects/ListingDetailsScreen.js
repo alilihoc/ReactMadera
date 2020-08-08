@@ -66,25 +66,27 @@ function ListingDetailsScreen({ route, navigation }) {
                 data={getFlatListItems(projectDetails)}
                 keyExtractor={(menuItem) => menuItem.title}
                 ItemSeparatorComponent={ListItemSeparator}
-                renderItem={({ item }) => (
-                  <ListItem
-                    title={item.title}
-                    subTitle={item.subtitle}
-                    IconComponent={
-                      <Icon
-                        name={item.icon.name}
-                        backgroundColor={item.icon.backgroundColor}
-                        iconSize={item.icon.iconSize ? item.icon.iconSize : 1}
-                      />
-                    }
-                    onPress={() =>
-                      navigation.navigate(
-                        item.targetScreen,
-                        item.targetScreenParams
-                      )
-                    }
-                  />
-                )}
+                renderItem={({ item }) =>
+                  item.display && (
+                    <ListItem
+                      title={item.title}
+                      subTitle={item.subtitle}
+                      IconComponent={
+                        <Icon
+                          name={item.icon.name}
+                          backgroundColor={item.icon.backgroundColor}
+                          iconSize={item.icon.iconSize ? item.icon.iconSize : 1}
+                        />
+                      }
+                      onPress={() =>
+                        navigation.navigate(
+                          item.targetScreen,
+                          item.targetScreenParams
+                        )
+                      }
+                    />
+                  )
+                }
               />
             </View>
           </View>
@@ -107,6 +109,7 @@ const getFlatListItems = (project) => {
       },
       targetScreen: routes.EDIT_PLAN,
       targetScreenParams: project,
+      display: true,
     },
     {
       title: project.plan.quotation.label.capitalize(),
@@ -117,6 +120,7 @@ const getFlatListItems = (project) => {
       },
       targetScreen: routes.QUOTATION,
       targetScreenParams: project.plan,
+      display: true,
     },
     {
       title: "Payment",
@@ -128,6 +132,7 @@ const getFlatListItems = (project) => {
       },
       targetScreen: routes.QUOTATION,
       targetScreenParams: project.plan.quotation.id,
+      display: project.plan.quotation.state >= 3,
     },
   ];
 };

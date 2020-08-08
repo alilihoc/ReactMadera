@@ -136,13 +136,13 @@ function QuotationScreen({ route }) {
             <View style={styles.ButtonsEditState}>
               <AppButton
                 title="Decline"
-                onPress={() => updateQuotationState(quotation.id, 3)}
+                onPress={() => updateQuotationState(quotation.id, 2)}
                 width="49%"
               />
               <AppButton
                 title="Accept"
                 color="secondary"
-                onPress={() => updateQuotationState(quotation.id, 2)}
+                onPress={() => updateQuotationState(quotation.id, 3)}
                 width="49%"
               />
             </View>
