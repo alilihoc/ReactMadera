@@ -7,6 +7,7 @@ import CustomerProjects from "../screens/customer/CustomerProjects";
 import PlanEdit from "../screens/project/PlanEdit";
 import ModuleEditScreen from "../screens/project/ModuleEditScreen";
 import QuotationScreen from "../screens/project/QuotationScreen";
+import PaymentScreen from "../screens/project/PaymentScreen";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,14 @@ const FeedNavigator = () => (
       options={() => ({
         headerShown: true,
         title: "Quotation",
+      })}
+    />
+    <Stack.Screen
+      name="Payment"
+      component={PaymentScreen}
+      options={() => ({
+        headerShown: true,
+        title: "Payment",
       })}
     />
   </Stack.Navigator>

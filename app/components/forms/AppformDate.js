@@ -26,7 +26,7 @@ function AppFormDate({ name, width, placeholder, ...otherProps }) {
     <View style={styles.container}>
       <Button
         onPress={() => setShow(true)}
-        title={showDate ? utils.getDueDate(values[name]) : "Due date"}
+        title={showDate ? utils.getDateFormatted(values[name]) : "Due date"}
         color="secondary"
         width={width}
       />

@@ -98,7 +98,6 @@ function ListingDetailsScreen({ route, navigation }) {
 
 const getFlatListItems = (project) => {
   if (project.plan == undefined) return null;
-
   return [
     {
       title: project.plan.name.capitalize(),
@@ -113,7 +112,8 @@ const getFlatListItems = (project) => {
     },
     {
       title: project.plan.quotation.label.capitalize(),
-      subtitle: utils.getQuotationState(project.plan.quotation.state),
+      subtitle:
+        "Status: " + utils.getQuotationState(project.plan.quotation.state),
       icon: {
         name: "alpha-q",
         backgroundColor: "#4b7bec",
@@ -123,15 +123,23 @@ const getFlatListItems = (project) => {
       display: true,
     },
     {
-      title: "Payment",
-      subtitle: "State",
+      title:
+        project.payment == undefined ? null : project.payment.name.capitalize(),
+      subtitle:
+        project.payment == undefined
+          ? null
+          : "Progess: " + project.payment.percent + "%",
       icon: {
         name: "credit-card-outline",
         backgroundColor: colors.primary,
         iconSize: 0.6,
       },
-      targetScreen: routes.QUOTATION,
-      targetScreenParams: project.plan.quotation.id,
+      targetScreen: routes.PAYMENT,
+      targetScreenParams: {
+        projectID: project.id,
+        customerEmail: project.customer.email,
+        quotationID: project.plan.quotation.id,
+      },
       display: project.plan.quotation.state >= 3,
     },
   ];

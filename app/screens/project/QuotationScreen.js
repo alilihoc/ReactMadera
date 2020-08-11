@@ -50,7 +50,6 @@ function QuotationScreen({ route }) {
   const updateQuotationState = async (idQuotation, state) => {
     const result = await quotationsApi.EditQuotationState(idQuotation, state);
     if (!result.ok) {
-      setUploadVisible(false);
       return alert("Could not edit quotation");
     }
     refreshScreen();

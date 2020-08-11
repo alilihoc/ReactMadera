@@ -31,13 +31,13 @@ const getArrayLength = (projects) => {
   }
 };
 
-const getDueDate = (date) => {
+const getDateFormatted = (date) => {
   if (date == "") return null;
   return moment(date).format("MMM D, YYYY");
 };
 
 const parseData = (data) => {
-  return data != undefined ? JSON.parse(data) : null;
+  return typeof data == "string" ? JSON.parse(data) : null;
 };
 
 const ctoUpperCase = (string) => {
@@ -58,6 +58,8 @@ const getQuotationState = (state) => {
       return "Declines";
     case 3:
       return "Accepted";
+    case 4:
+      return "In order";
     default:
       return null;
   }
@@ -93,7 +95,7 @@ export default {
   getCreationDate,
   getCardName,
   getNbProjectsRow,
-  getDueDate,
+  getDateFormatted,
   parseData,
   ctoUpperCase,
   getFormattedDate,

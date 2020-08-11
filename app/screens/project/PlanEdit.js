@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View, TextInput } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 
 import useApi from "../../hooks/useApi";
 import AppButton from "../../components/Button";
