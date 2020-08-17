@@ -16,7 +16,7 @@ const menuItems = [
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
-    targetStack: "Feed",
+    targetStack: "Projects",
     targetScreen: routes.LISTING_PROJECTS,
   },
   {

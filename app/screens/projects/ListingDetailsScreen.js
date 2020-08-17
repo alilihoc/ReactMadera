@@ -29,14 +29,14 @@ function ListingDetailsScreen({ route, navigation }) {
 
   return (
     <>
+      <ActivityIndicator visible={getProjectApi.loading} />
+
       {getCustomerApi.error && (
         <>
           <AppText>Couldn't retrieve the project.</AppText>
           <Button title="Retry" onPress={getProjectApi.request} />
         </>
       )}
-      <ActivityIndicator visible={getProjectApi.loading} />
-
       <View style={{ display: getProjectApi.loading ? "none" : "flex" }}>
         <Image
           style={styles.image}
@@ -169,16 +169,18 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   projectInformations: {
-    padding: 20,
-  },
-  userContainer: {
-    marginVertical: -10,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    backgroundColor: "white",
+    borderBottomWidth: 4,
+    borderBottomColor: colors.light,
+    maxHeight: 90,
   },
   username: {
     fontSize: 22,
   },
   viewDetail: {
-    marginTop: 5,
+    marginTop: 4,
   },
 });
 

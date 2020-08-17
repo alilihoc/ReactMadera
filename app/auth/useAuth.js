@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import jwtDecode from "jwt-decode";
 
 import AuthContext from "./context";
@@ -7,13 +7,16 @@ import userApi from "../api/users";
 
 export default useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const logIn = async (authToken) => {
     try {
       const user = jwtDecode(authToken);
+      setLoading(true);
       const result = await userApi.getUserByMAil(user.username);
       setUser(result.data[0]);
       authStorage.storeToken(authToken);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -26,5 +29,5 @@ export default useAuth = () => {
 
   const getUser = async () => {};
 
-  return { user, logIn, logOut };
+  return { user, loading, logIn, logOut };
 };

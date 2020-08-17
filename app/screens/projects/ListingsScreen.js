@@ -28,56 +28,60 @@ function ListingsScreen({ navigation }) {
   };
 
   return (
-    <Screen style={styles.screen}>
-      {getProjectsApi.error && (
-        <>
-          <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={refreshSearch} />
-        </>
-      )}
-      <View style={styles.searchContainer}>
-        <TextInput
-          onChangeText={(text) => setSearch(text)}
-          style={styles.searchInput}
-          placeholder="Project name"
-          value={search}
-        />
-        <Icon
-          name="account-search"
-          size={35}
-          backgroundColor={colors.primary}
-          iconColor="#fff"
-          onPress={() => refreshSearch()}
-          style={styles.searchIcon}
-        ></Icon>
-      </View>
+    <>
       <ActivityIndicator visible={getProjectsApi.loading} />
-      <View
-        style={[
-          styles.viewContainer,
-          { display: getProjectsApi.loading ? "none" : "flex" },
-        ]}
-      >
-        <FlatList
-          data={getProjectsApi.data}
-          keyExtractor={(listing) => listing.id.toString()}
-          renderItem={({ item }) => (
-            <Card
-              title={utils.getCardName(item)}
-              subTitle={utils.getCreationDate(item)}
-              image={require("../../assets/houses/casa_index.jpg")}
-              onPress={() => navigation.navigate(routes.PROJECT_DETAILS, item)}
-            />
-          )}
-        />
-      </View>
-    </Screen>
+      <Screen style={styles.screen}>
+        {getProjectsApi.error && (
+          <>
+            <AppText>Couldn't retrieve the listings.</AppText>
+            <Button title="Retry" onPress={refreshSearch} />
+          </>
+        )}
+        <View style={styles.searchContainer}>
+          <TextInput
+            onChangeText={(text) => setSearch(text)}
+            style={styles.searchInput}
+            placeholder="Project name"
+            value={search}
+          />
+          <Icon
+            name="account-search"
+            size={35}
+            backgroundColor={colors.primary}
+            iconColor="#fff"
+            onPress={() => refreshSearch()}
+            style={styles.searchIcon}
+          ></Icon>
+        </View>
+        <View
+          style={[
+            styles.viewContainer,
+            { display: getProjectsApi.loading ? "none" : "flex" },
+          ]}
+        >
+          <FlatList
+            data={getProjectsApi.data}
+            keyExtractor={(listing) => listing.id.toString()}
+            renderItem={({ item }) => (
+              <Card
+                title={utils.getCardName(item)}
+                subTitle={utils.getCreationDate(item)}
+                image={require("../../assets/houses/casa_index.jpg")}
+                onPress={() =>
+                  navigation.navigate(routes.PROJECT_DETAILS, item)
+                }
+              />
+            )}
+          />
+        </View>
+      </Screen>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 15,
+    padding: 10,
     backgroundColor: colors.light,
   },
   searchContainer: {
@@ -101,7 +105,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 7,
   },
-  IconSearchWrap: { backgroundColor: "red" },
   viewContainer: {
     flex: 1,
     flexDirection: "column",

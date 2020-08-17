@@ -11,6 +11,8 @@ import {
 } from "../../components/forms";
 import authApi from "../../api/auth";
 import useAuth from "../../auth/useAuth";
+import useApi from "../../hooks/useApi";
+import ActivityIndicator from "../../components/ActivityIndicator";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -19,57 +21,60 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const auth = useAuth();
+  const loginApi = useApi(authApi.login);
   const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
-    const result = await authApi.login(email, password);
+    const result = await loginApi.request(email, password);
     if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
     auth.logIn(result.data.token);
   };
 
   return (
-    <ScrollView>
-      <Screen style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/logo-red.png")}
-        />
+    <>
+      <ActivityIndicator visible={loginApi.loading || auth.loading} />
+      <ScrollView style={styles.scrollView}>
+        <Screen style={styles.container}>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/logo-red.png")}
+          />
+          <Form
+            initialValues={{ email: "", password: "" }}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+          >
+            <ErrorMessage
+              error="Invalid email and/or password."
+              visible={loginFailed}
+            />
 
-        <Form
-          initialValues={{ email: "", password: "" }}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
-        >
-          <ErrorMessage
-            error="Invalid email and/or password."
-            visible={loginFailed}
-          />
-
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress"
-            style={styles.input}
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock"
-            name="password"
-            placeholder="Password"
-            secureTextEntry
-            textContentType="password"
-            style={styles.input}
-          />
-          <SubmitButton title="Login" />
-        </Form>
-      </Screen>
-    </ScrollView>
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Email"
+              textContentType="emailAddress"
+              style={styles.input}
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              secureTextEntry
+              textContentType="password"
+              style={styles.input}
+            />
+            <SubmitButton title="Login" />
+          </Form>
+        </Screen>
+      </ScrollView>
+    </>
   );
 }
 
