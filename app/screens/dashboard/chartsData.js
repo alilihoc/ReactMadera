@@ -3,7 +3,7 @@ export default {
     labels: ["March", "April", "May", "June", "July", "August"],
     datasets: [
       {
-        data: [165000, 110000, 85000, 50000, 130000, 200000],
+        data: [1650000, 1100000, 850000, 500000, 1300000, 2000000],
       },
     ],
   },
@@ -53,36 +53,165 @@ export default {
     },
   ],
 
-  lastYearsBarChartData: [
-    [
+  lastYearsBarChartData: {
+    labels: [2015, 2016, 2017, 2018, 2019, 2020],
+    datasets: [
       {
-        v: 49,
-        name: "apple",
-      },
-      {
-        v: 42,
-        name: "apple",
+        data: [13, 14, 15, 18, 22, 11],
       },
     ],
-    [
+  },
+
+  lastYearsPieChartData: [
+    {
+      name: "2015",
+      accessor: 13,
+      color: "#40315c",
+      legendFontColor: "#40315c",
+      legendFontSize: 15,
+    },
+    {
+      name: "2016",
+      accessor: 14,
+      color: "#78396f",
+      legendFontColor: "#78396f",
+      legendFontSize: 15,
+    },
+    {
+      name: "2017",
+      accessor: 15,
+      color: "#b1406f",
+      legendFontColor: "#b1406f",
+      legendFontSize: 15,
+    },
+    {
+      name: "2018",
+      accessor: 18,
+      color: "#e0515d",
+      legendFontColor: "#e0515d",
+      legendFontSize: 15,
+    },
+    {
+      name: "2019",
+      accessor: 22,
+      color: "#fc763e",
+      legendFontColor: "#fc763e",
+      legendFontSize: 15,
+    },
+    {
+      name: "2020",
+      accessor: 11,
+      color: "#ffa600",
+      legendFontColor: "#ffa600",
+      legendFontSize: 15,
+    },
+  ],
+
+  lastMonthsProjectsLineChartData: {
+    labels: ["March", "April", "May", "June", "July", "August"],
+    datasets: [
       {
-        v: 69,
-        name: "banana",
-      },
-      {
-        v: 62,
-        name: "banana",
+        data: [7, 5, 4, 2, 6, 10],
       },
     ],
-    [
+  },
+
+  lastMonthsProjectsPieChartData: [
+    {
+      name: "March",
+      accessor: 7,
+      color: "#40315c",
+      legendFontColor: "#40315c",
+      legendFontSize: 15,
+    },
+    {
+      name: "April",
+      accessor: 5,
+      color: "#78396f",
+      legendFontColor: "#78396f",
+      legendFontSize: 15,
+    },
+    {
+      name: "May",
+      accessor: 4,
+      color: "#b1406f",
+      legendFontColor: "#b1406f",
+      legendFontSize: 15,
+    },
+    {
+      name: "June",
+      accessor: 2,
+      color: "#e0515d",
+      legendFontColor: "#e0515d",
+      legendFontSize: 15,
+    },
+    {
+      name: "July",
+      accessor: 6,
+      color: "#fc763e",
+      legendFontColor: "#fc763e",
+      legendFontSize: 15,
+    },
+    {
+      name: "August",
+      accessor: 10,
+      color: "#ffa600",
+      legendFontColor: "#ffa600",
+      legendFontSize: 15,
+    },
+  ],
+
+  lastYearsProjectsBarChartData: {
+    labels: [2015, 2016, 2017, 2018, 2019, 2020],
+    datasets: [
       {
-        v: 29,
-        name: "grape",
-      },
-      {
-        v: 15,
-        name: "grape",
+        data: [65, 70, 75, 90, 125, 65],
       },
     ],
+  },
+
+  lastYearsProjectsPieChartData: [
+    {
+      name: "2015",
+      accessor: 100,
+      color: "#40315c",
+      legendFontColor: "#40315c",
+      legendFontSize: 15,
+    },
+    {
+      name: "2016",
+      accessor: 80,
+      color: "#78396f",
+      legendFontColor: "#78396f",
+      legendFontSize: 15,
+    },
+    {
+      name: "2017",
+      accessor: 75,
+      color: "#b1406f",
+      legendFontColor: "#b1406f",
+      legendFontSize: 15,
+    },
+    {
+      name: "2018",
+      accessor: 90,
+      color: "#e0515d",
+      legendFontColor: "#e0515d",
+      legendFontSize: 15,
+    },
+    {
+      name: "2019",
+      accessor: 125,
+      color: "#fc763e",
+      legendFontColor: "#fc763e",
+      legendFontSize: 15,
+    },
+    {
+      name: "2020",
+      accessor: 65,
+      color: "#ffa600",
+      legendFontColor: "#ffa600",
+      legendFontSize: 15,
+    },
   ],
 };

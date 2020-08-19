@@ -13,4 +13,5 @@ export default Object.freeze({
   EDIT_MODULE: "ModuleEdit",
   QUOTATION: "Quotation",
   PAYMENT: "Payment",
+  STATS: "Stats",
 });

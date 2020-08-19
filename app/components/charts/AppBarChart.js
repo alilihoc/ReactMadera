@@ -1,58 +1,44 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Bar } from "react-native-pathjs-charts-expo";
+import { StyleSheet, Dimensions } from "react-native";
+import { BarChart } from "react-native-chart-kit";
 
-function AppBarChart({ data }) {
-  let options = {
-    width: 300,
-    height: 300,
-    margin: {
-      top: 20,
-      left: 25,
-      bottom: 50,
-      right: 20,
-    },
-    color: "#2980B9",
-    gutter: 20,
-    animate: {
-      type: "oneByOne",
-      duration: 200,
-      fillTransition: 3,
-    },
-    axisX: {
-      showAxis: true,
-      showLines: true,
-      showLabels: true,
-      showTicks: true,
-      zeroAxis: false,
-      orient: "bottom",
-      label: {
-        fontFamily: "Arial",
-        fontSize: 8,
-        fontWeight: true,
-        fill: "#34495E",
-      },
-    },
-    axisY: {
-      showAxis: true,
-      showLines: true,
-      showLabels: true,
-      showTicks: true,
-      zeroAxis: false,
-      orient: "left",
-      label: {
-        fontFamily: "Arial",
-        fontSize: 8,
-        fontWeight: true,
-        fill: "#34495E",
-      },
-    },
-  };
-
+function AppBarChart({
+  graphStyle,
+  data,
+  color = "#e0515d",
+  yAxisLabel = "M ",
+}) {
   return (
-    <View>
-      <Bar data={data} options={options} accessorKey="v" />
-    </View>
+    <BarChart
+      style={graphStyle}
+      data={data}
+      width={Dimensions.get("window").width - 20}
+      height={230}
+      yAxisLabel={yAxisLabel}
+      chartConfig={{
+        backgroundColor: color,
+        backgroundGradientFrom: color,
+        backgroundGradientTo: color,
+        decimalPlaces: 0,
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        style: {
+          borderRadius: 16,
+        },
+      }}
+      style={{
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+
+        elevation: 10,
+      }}
+      showBarTops={true}
+    />
   );
 }
 

@@ -4,7 +4,7 @@ import { PieChart } from "react-native-chart-kit";
 
 import colors from "../../config/colors";
 
-function AppPieChart({ data, color = "primary" }) {
+function AppPieChart({ data, color = "white" }) {
   return (
     <>
       <PieChart
@@ -12,20 +12,23 @@ function AppPieChart({ data, color = "primary" }) {
         width={Dimensions.get("window").width - 20}
         height={220}
         chartConfig={{
-          backgroundColor: colors[color],
-          backgroundGradientFrom: colors[color],
-          backgroundGradientTo: colors[color],
-          decimalPlaces: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16,
-            paddingLeft: 20,
-            marginLeft: 10,
-          },
         }}
         accessor="accessor"
-        backgroundColor="transparent"
-        paddingLeft="15"
+        style={{
+          marginVertical: 8,
+          borderRadius: 10,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 5,
+          },
+          shadowOpacity: 0.34,
+          shadowRadius: 6.27,
+
+          elevation: 10,
+        }}
+        backgroundColor={color}
       />
     </>
   );

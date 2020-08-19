@@ -35,6 +35,14 @@ const menuItems = [
     },
     targetScreen: routes.MESSAGES,
   },
+  {
+    title: "Dashboard",
+    icon: {
+      name: "chart-pie",
+      backgroundColor: "#636e72",
+    },
+    targetScreen: routes.STATS,
+  },
 ];
 
 function AccountScreen({ navigation }) {

@@ -7,6 +7,7 @@ import UserScreen from "../screens/account/UserScreen";
 import CustomersScreen from "../screens/account/CustomersScreen";
 import CustomerScreen from "../screens/customer/CustomerScreen";
 import CustomerProjects from "../screens/customer/CustomerProjects";
+import StatsScreen from "../screens/dashboard/StatsScreen";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,12 @@ const AccountNavigator = () => (
       name="CustomerProjects"
       component={CustomerProjects}
       options={{ headerShown: true, title: "Customer projects" }}
+    />
+
+    <Stack.Screen
+      name="Stats"
+      component={StatsScreen}
+      options={{ headerShown: true, title: "Statistics" }}
     />
   </Stack.Navigator>
 );
