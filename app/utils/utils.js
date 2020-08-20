@@ -61,13 +61,13 @@ const getQuotationState = (state) => {
     case 4:
       return "In order";
     default:
-      return null;
+      return "Not generated";
   }
 };
 
 const getItemPrice = (price) => {
   var parts = price.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
 };
 

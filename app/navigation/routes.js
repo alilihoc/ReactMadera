@@ -14,4 +14,5 @@ export default Object.freeze({
   QUOTATION: "Quotation",
   PAYMENT: "Payment",
   STATS: "Stats",
+  RECENT_PAYMENTS: "RecentPayments",
 });

@@ -27,6 +27,7 @@ export const addProject = (project, onUploadProgress) => {
       onUploadProgress(progress.loaded / progress.total),
   });
 };
+
 export default {
   getProjects,
   addProject,

@@ -101,7 +101,10 @@ const getFlatListItems = (project) => {
   return [
     {
       title: project.plan.name.capitalize(),
-      subtitle: project.plan.gamme.label.capitalize(),
+      subtitle:
+        project.plan.gamme == undefined
+          ? null
+          : project.plan.gamme.label.capitalize(),
       icon: {
         name: "alpha-p",
         backgroundColor: colors.secondary,
@@ -111,9 +114,14 @@ const getFlatListItems = (project) => {
       display: true,
     },
     {
-      title: project.plan.quotation.label.capitalize(),
+      title: "Quotation",
       subtitle:
-        "Status: " + utils.getQuotationState(project.plan.quotation.state),
+        "Status: " +
+        utils.getQuotationState(
+          project.plan.quotation == undefined
+            ? null
+            : project.plan.quotation.state
+        ),
       icon: {
         name: "alpha-q",
         backgroundColor: "#4b7bec",
@@ -123,8 +131,7 @@ const getFlatListItems = (project) => {
       display: true,
     },
     {
-      title:
-        project.payment == undefined ? null : project.payment.name.capitalize(),
+      title: "Payment",
       subtitle:
         project.payment == undefined
           ? null
@@ -138,9 +145,16 @@ const getFlatListItems = (project) => {
       targetScreenParams: {
         projectID: project.id,
         customerEmail: project.customer.email,
-        quotationID: project.plan.quotation.id,
+        customerID: project.customer.id,
+        quotationID:
+          project.plan.quotation == undefined
+            ? null
+            : project.plan.quotation.id,
       },
-      display: project.plan.quotation.state >= 3,
+      display:
+        project.plan.quotation == undefined
+          ? null
+          : project.plan.quotation.state >= 3,
     },
   ];
 };

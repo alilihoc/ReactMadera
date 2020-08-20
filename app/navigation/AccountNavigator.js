@@ -8,6 +8,7 @@ import CustomersScreen from "../screens/account/CustomersScreen";
 import CustomerScreen from "../screens/customer/CustomerScreen";
 import CustomerProjects from "../screens/customer/CustomerProjects";
 import StatsScreen from "../screens/dashboard/StatsScreen";
+import RecentPaymentsScreen from "../screens/dashboard/RecentPaymentsScreen";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,12 @@ const AccountNavigator = () => (
       name="Stats"
       component={StatsScreen}
       options={{ headerShown: true, title: "Statistics" }}
+    />
+
+    <Stack.Screen
+      name="RecentPayments"
+      component={RecentPaymentsScreen}
+      options={{ headerShown: true, title: "Recent Payments" }}
     />
   </Stack.Navigator>
 );

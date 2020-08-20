@@ -3,6 +3,7 @@ import { StyleSheet, FlatList, View, Modal, Button } from "react-native";
 import StripeCheckout from "expo-stripe-checkout";
 
 import paymentsApi from "../../api/payment";
+import recentPaymentsApi from "../../api/recentPayments";
 import colors from "../../config/colors";
 import ListItem from "../../components/lists/ListItem";
 import AppText from "../../components/Text";
@@ -45,6 +46,11 @@ function PaymentScreen({ route, navigation }) {
     if (!result.ok) {
       return alert("Could not edit payment");
     }
+    recentPaymentsApi.insertRecentPayments(
+      projectId,
+      route.params.customerID,
+      currentStep.amount
+    );
     refreshScreen();
     setBLoading(false);
   };

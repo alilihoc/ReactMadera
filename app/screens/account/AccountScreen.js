@@ -43,6 +43,14 @@ const menuItems = [
     },
     targetScreen: routes.STATS,
   },
+  {
+    title: "Recent Payments",
+    icon: {
+      name: "cash-usd",
+      backgroundColor: "#30336b",
+    },
+    targetScreen: routes.RECENT_PAYMENTS,
+  },
 ];
 
 function AccountScreen({ navigation }) {

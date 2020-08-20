@@ -25,7 +25,7 @@ function StatsScreen(props) {
           <View style={styles.headerCard}>
             <AppText style={styles.textCardHeader}>Total</AppText>
             <AppText style={styles.textCardHeader}>Profit</AppText>
-            <AppText style={styles.textCardPrice}>$11,325,160 $</AppText>
+            <AppText style={styles.textCardPrice}>$5,892,135 $</AppText>
           </View>
         </View>
 
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 15,
     color: "#6c6c6c",
+    textAlign: "center",
   },
   headerSeparator: {
     width: "50%",
@@ -75,12 +76,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     marginTop: 10,
     marginBottom: 25,
+    alignSelf: "center",
   },
   sectionHeader: {
     fontSize: 16,
     fontFamily: "Roboto",
     color: "#6c6c6c",
     marginTop: 40,
+    textAlign: "center",
   },
   headerView: {
     flex: 1,
