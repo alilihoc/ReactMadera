@@ -20,7 +20,8 @@ function CustomerProjects({ route, navigation }) {
             <Card
               title={item.name}
               subTitle={utils.getCreationDate(item)}
-              image={require("../../assets/houses/casa_index.jpg")}
+              imageUri={item.uri}
+              defaultImageSource={require("../../assets/houses/casa_index.jpg")}
               onPress={() => navigation.navigate(routes.PROJECT_DETAILS, item)}
             />
           )}

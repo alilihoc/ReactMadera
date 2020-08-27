@@ -13,43 +13,51 @@ function StatsScreen(props) {
     <ScrollView>
       <View style={styles.container}>
         {/* Header */}
-        <AppText style={styles.headerText}>Overview</AppText>
-        <View style={[styles.headerSeparator, { width: "25%" }]} />
+        <AppText style={styles.headerText}>Aperçu</AppText>
+        <View style={[styles.headerSeparator, { width: "18%" }]} />
         <View style={styles.headerView}>
           <View style={styles.headerCard}>
-            <AppText style={styles.textCardHeader}>Total</AppText>
-            <AppText style={styles.textCardHeader}>Revenue</AppText>
-            <AppText style={styles.textCardPrice}>$11,325,160</AppText>
+            <AppText style={styles.textCardHeader}>CA</AppText>
+            <AppText style={styles.textCardHeader}>annuel</AppText>
+            <AppText style={styles.textCardPrice}>11,325,160€</AppText>
           </View>
 
           <View style={styles.headerCard}>
-            <AppText style={styles.textCardHeader}>Total</AppText>
-            <AppText style={styles.textCardHeader}>Profit</AppText>
-            <AppText style={styles.textCardPrice}>$5,892,135 $</AppText>
+            <AppText style={styles.textCardHeader}>Bénéfice</AppText>
+            <AppText style={styles.textCardHeader}>annuel</AppText>
+            <AppText style={styles.textCardPrice}>5,892,135€</AppText>
           </View>
         </View>
 
         {/* Last 6 month Revenues*/}
-        <AppText style={styles.sectionHeader}>Last 6 months Revenues</AppText>
-        <View style={[styles.headerSeparator, { width: "48%" }]} />
+        <AppText style={styles.sectionHeader}>
+          CA sur les 6 derniers mois
+        </AppText>
+        <View style={[styles.headerSeparator, { width: "51%" }]} />
         <AppLineChart data={chartsData.lastMonthsLineChartData} />
         <AppPieChart data={chartsData.lastMonthsPieChartData} />
 
         {/* Last 6 years Revenues*/}
-        <AppText style={styles.sectionHeader}>Last 6 Years Revenues</AppText>
-        <View style={[styles.headerSeparator, { width: "44%" }]} />
+        <AppText style={styles.sectionHeader}>
+          CA sur les 6 dernières années
+        </AppText>
+        <View style={[styles.headerSeparator, { width: "57%" }]} />
         <AppBarChart data={chartsData.lastYearsBarChartData} />
         <AppPieChart data={chartsData.lastYearsPieChartData} />
 
         {/* Last 6 month Projects*/}
-        <AppText style={styles.sectionHeader}>Last 6 months Projects</AppText>
-        <View style={[styles.headerSeparator, { width: "45%" }]} />
+        <AppText style={styles.sectionHeader}>
+          Projets sur les 6 derniers mois
+        </AppText>
+        <View style={[styles.headerSeparator, { width: "57%" }]} />
         <AppLineChart data={chartsData.lastMonthsProjectsLineChartData} />
         <AppPieChart data={chartsData.lastMonthsProjectsPieChartData} />
 
         {/* Last 6 years Revenues*/}
-        <AppText style={styles.sectionHeader}>Last 6 Years Projects</AppText>
-        <View style={[styles.headerSeparator, { width: "41%" }]} />
+        <AppText style={styles.sectionHeader}>
+          Projects sur les 6 derniéres années
+        </AppText>
+        <View style={[styles.headerSeparator, { width: "68%" }]} />
         <AppBarChart
           data={chartsData.lastYearsProjectsBarChartData}
           yAxisLabel=""

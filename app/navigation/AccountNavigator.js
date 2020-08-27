@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountScreen from "../screens/account/AccountScreen";
-import ListingsScreen from "../screens/projects/ListingsScreen";
+import ListingsScreen from "../screens/projects/ProjectsScreen";
 import MessagesScreen from "../screens/account/MessagesScreen";
 import UserScreen from "../screens/account/UserScreen";
 import CustomersScreen from "../screens/account/CustomersScreen";
@@ -20,12 +20,12 @@ const AccountNavigator = () => (
     <Stack.Screen
       name="MyCustomers"
       component={CustomersScreen}
-      options={{ title: "Customers" }}
+      options={{ title: "Clients" }}
     />
     <Stack.Screen
       name="UserInfos"
       component={UserScreen}
-      options={{ title: "My Informations" }}
+      options={{ title: "Mes informations" }}
     />
     <Stack.Screen
       name="Customer"
@@ -36,19 +36,19 @@ const AccountNavigator = () => (
     <Stack.Screen
       name="CustomerProjects"
       component={CustomerProjects}
-      options={{ headerShown: true, title: "Customer projects" }}
+      options={{ headerShown: true, title: "Projets client" }}
     />
 
     <Stack.Screen
       name="Stats"
       component={StatsScreen}
-      options={{ headerShown: true, title: "Statistics" }}
+      options={{ headerShown: true, title: "Tableau de bord" }}
     />
 
     <Stack.Screen
       name="RecentPayments"
       component={RecentPaymentsScreen}
-      options={{ headerShown: true, title: "Recent Payments" }}
+      options={{ headerShown: true, title: "Paiements récents" }}
     />
   </Stack.Navigator>
 );

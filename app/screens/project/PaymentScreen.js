@@ -101,16 +101,16 @@ function PaymentScreen({ route, navigation }) {
             <Button title="Close" onPress={() => closeProcessPaiement()} />
             <StripeCheckout
               publicKey="pk_test_51HDyYNHYGSlGuvh2vs2LhXv32cozwlNPhfzS7DbO9de8nUPV2BGOM6YM9kqxLKPmr0VYBUoOQ70tUnW4QDrHcCIn0032aPf3Kz"
-              amount={currentStep !== null ? currentStep.amount : null}
+              amount={currentStep !== null ? currentStep.amount * 100 : null}
               imageUrl="https://logos.flamingtext.com/City-Logos/Madera-Water-Logo.png"
               storeName={
-                "Payment : Step " +
+                "Payment : Etape " +
                 (currentStep !== null ? currentStep.index : null)
               }
               description={
                 currentStep !== null ? currentStep.title : "Paiement"
               }
-              currency="USD"
+              currency="EUR"
               allowRememberMe={true}
               prepopulatedEmail={route.params.customerEmail}
               onClose={() => console.log("Close")}
@@ -143,10 +143,10 @@ const getFlatListItems = (payment) => {
       title: payment.step1Name,
       subtitle:
         payment.step1Amount +
-        " $" +
+        "€" +
         (payment.step1State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step1DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step1DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step1State == 1 ? colors.secondary : colors.primary,
     },
@@ -158,10 +158,10 @@ const getFlatListItems = (payment) => {
       title: payment.step2Name,
       subtitle:
         payment.step2Amount +
-        " $" +
+        "€" +
         (payment.step2State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step2DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step2DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step2State == 1 ? colors.secondary : colors.primary,
     },
@@ -173,10 +173,10 @@ const getFlatListItems = (payment) => {
       title: payment.step3Name,
       subtitle:
         payment.step3Amount +
-        " $" +
+        "€" +
         (payment.step3State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step3DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step3DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step3State == 1 ? colors.secondary : colors.primary,
     },
@@ -188,10 +188,10 @@ const getFlatListItems = (payment) => {
       title: payment.step4Name,
       subtitle:
         payment.step4Amount +
-        " $" +
+        "€" +
         (payment.step4State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step4DatePaiment)
-          : " - Waiting Payment"),
+          ? "  - Réglé le " + utils.getDateFormatted(payment.step4DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step4State == 1 ? colors.secondary : colors.primary,
     },
@@ -203,10 +203,10 @@ const getFlatListItems = (payment) => {
       percent: payment.step5Percentage,
       subtitle:
         payment.step5Amount +
-        " $" +
+        "€" +
         (payment.step5State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step5DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step5DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step5State == 1 ? colors.secondary : colors.primary,
     },
@@ -218,10 +218,10 @@ const getFlatListItems = (payment) => {
       percent: payment.step6Percentage,
       subtitle:
         payment.step6Amount +
-        " $" +
+        "€" +
         (payment.step6State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step6DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step6DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step6State == 1 ? colors.secondary : colors.primary,
     },
@@ -233,10 +233,10 @@ const getFlatListItems = (payment) => {
       percent: payment.step7Percentage,
       subtitle:
         payment.step7Amount +
-        " $" +
+        "€" +
         (payment.step7State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step7DatePaiment)
-          : " - Waiting Payment "),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step7DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step7State == 1 ? colors.secondary : colors.primary,
     },
@@ -248,10 +248,10 @@ const getFlatListItems = (payment) => {
       percent: payment.step8Percentage,
       subtitle:
         payment.step8Amount +
-        " $" +
+        "€" +
         (payment.step8State == 1
-          ? " - Paid on " + utils.getDateFormatted(payment.step8DatePaiment)
-          : " - Waiting Payment"),
+          ? " - Réglé le " + utils.getDateFormatted(payment.step8DatePaiment)
+          : " - En attente de paiement"),
 
       iconColor: payment.step8State == 1 ? colors.secondary : colors.primary,
     },

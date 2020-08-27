@@ -5,6 +5,8 @@ import ImageInput from "./ImageInput";
 function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
   const scrollView = useRef();
 
+  console.log(imageUris);
+
   return (
     <View>
       <ScrollView

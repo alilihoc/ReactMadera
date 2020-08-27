@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import MapView from "react-native-maps";
+import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 
 import { ListItem, ListItemSeparator } from "../../components/lists";
 import colors from "../../config/colors";
@@ -8,6 +9,7 @@ import Screen from "../../components/Screen";
 import utils from "../../utils/utils";
 import routes from "../../navigation/routes";
 import customersApi from "../../api/customers";
+import coordinatesApi from "../../api/geocoder/coordinates";
 import useApi from "../../hooks/useApi";
 import ActivityIndicator from "../../components/ActivityIndicator";
 
@@ -15,9 +17,33 @@ function CustomerScreen({ route, navigation }) {
   const id = route.params;
   const getCustomerApi = useApi(customersApi.getCustomer);
 
+  const [region, setRegion] = useState(null);
+
   useEffect(() => {
-    getCustomerApi.request(id);
+    getCustomerApi.request(id).then((res) => {
+      if (res.data.adress) getCoordinates(res.data.adress);
+    });
   }, []);
+
+  const getCoordinates = async (address) => {
+    try {
+      coordinatesApi.getCoordiatesFromAddress(address).then((data) => {
+        if (data.data.results[0] !== undefined) {
+          const res = data.data.results[0].geometry;
+          setRegion({
+            latitude: res.location.lat,
+            longitude: res.location.lng,
+            latitudeDelta:
+              res.viewport.northeast.lat - res.viewport.southwest.lat + 0.02,
+            longitudeDelta:
+              res.viewport.northeast.lng - res.viewport.southwest.lng + 0.02,
+          });
+        }
+      });
+    } catch (error) {
+      console.log("err " + error);
+    }
+  };
 
   const customer = getCustomerApi.data;
   const menuItems = [
@@ -71,6 +97,7 @@ function CustomerScreen({ route, navigation }) {
             )}
           />
         </View>
+        <ListItemSeparator />
         <View style={styles.projectsView}>
           <ListItem
             title={utils.getNbProjectsRow(customer.projects)}
@@ -81,6 +108,24 @@ function CustomerScreen({ route, navigation }) {
           />
         </View>
       </View>
+
+      {region && (
+        <MapView
+          style={[styles.mapStyle, { opacity: getCustomerApi.loading ? 0 : 1 }]}
+          initialRegion={region}
+          zoomEnabled={true}
+          zoomControlEnabled={true}
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: region.latitude,
+              longitude: region.longitude,
+            }}
+            title={customer.firstname + " " + customer.lastname}
+            description={customer.adress}
+          />
+        </MapView>
+      )}
     </Screen>
   );
 }
@@ -92,11 +137,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   userHeader: {
-    marginTop: 15,
-    marginBottom: 40,
+    marginTop: -5,
+    marginBottom: 15,
   },
-  projectsView: {
-    marginTop: 20,
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: 250,
   },
 });
 

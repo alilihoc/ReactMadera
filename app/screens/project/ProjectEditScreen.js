@@ -8,6 +8,7 @@ import {
   SubmitButton,
   FormPicker as Picker,
 } from "../../components/forms";
+
 import Screen from "../../components/Screen";
 import projectsApi from "../../api/projects";
 import UploadScreen from "../UploadScreen";
@@ -17,6 +18,7 @@ import routes from "../../navigation/routes";
 import AppFormDate from "../../components/forms/AppformDate";
 import gammesApi from "../../api/gammes";
 import useAuth from "../../auth/useAuth";
+import FormImagePicker from "../../components/forms/FormImagePicker";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().min(1).label("Fistname"),
@@ -70,6 +72,7 @@ function ProjectEditScreen({ navigation }) {
             name: "",
             gamme: null,
             dateEnd: "",
+            images: [],
           }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
@@ -83,13 +86,13 @@ function ProjectEditScreen({ navigation }) {
             maxLength={255}
             width="100%"
             name="firstname"
-            placeholder="Firstname"
+            placeholder="Nom"
             style={styles.input}
           />
           <FormField
             maxLength={255}
             width="100%"
-            name="lastname"
+            name="Prénom"
             placeholder="Lastname"
             style={styles.input}
           />
@@ -104,7 +107,7 @@ function ProjectEditScreen({ navigation }) {
             maxLength={255}
             keyboardType="phone-pad"
             name="phone"
-            placeholder="Phone number"
+            placeholder="Numéro de téléphone"
             style={styles.input}
           />
           {/* ---- Project Info ---- */}
@@ -112,6 +115,7 @@ function ProjectEditScreen({ navigation }) {
           <AppText style={styles.formHeader}>Project informations</AppText>
           <View style={styles.headerSeparator} />
 
+          <FormImagePicker name="images" />
           <FormField maxLength={255} name="name" placeholder="Project name" />
           <View style={styles.bottomFields}>
             <AppFormDate name="dateEnd" placeholder="Due date" width="80%" />
@@ -119,12 +123,12 @@ function ProjectEditScreen({ navigation }) {
               items={getGammesApi.data}
               name="gamme"
               numberOfColumns={3}
-              placeholder="Select a range"
+              placeholder="Gamme"
               width="50%"
             />
           </View>
 
-          <SubmitButton title="Post" />
+          <SubmitButton title="Envoyer" />
         </Form>
       </ScrollView>
     </Screen>

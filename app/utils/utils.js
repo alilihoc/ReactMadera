@@ -1,10 +1,12 @@
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
+
+moment.locale("fr");
 
 const getCreationDate = (item) => {
   return (
-    moment(item.creationDate).format("MMM D, YYYY") +
+    moment(item.creationDate).format("D MMM YYYY") +
     " - " +
-    moment(item.dateEnd).format("MMM D, YYYY")
+    moment(item.dateEnd).format("D MMM YYYY")
   );
 };
 
@@ -22,7 +24,7 @@ const getNbProjectsRow = (projects) => {
   if (nbProjects == 1) {
     isPlural = false;
   }
-  return nbProjects + (isPlural ? " projects" : " project");
+  return nbProjects + (isPlural ? " projets" : " projet");
 };
 
 const getArrayLength = (projects) => {
@@ -33,7 +35,7 @@ const getArrayLength = (projects) => {
 
 const getDateFormatted = (date) => {
   if (date == "") return null;
-  return moment(date).format("MMM D, YYYY");
+  return moment(date).format("D MMM YYYY");
 };
 
 const parseData = (data) => {
@@ -45,23 +47,23 @@ const ctoUpperCase = (string) => {
 };
 
 const getFormattedDate = (date) => {
-  return moment(date).format("MMM D, YYYY");
+  return moment(date).format("D MMM YYYY");
 };
 
 const getQuotationState = (state) => {
   switch (state) {
     case 0:
-      return "Not generated";
+      return "Non généré";
     case 1:
-      return "Waiting answer";
+      return "En attente de réponse";
     case 2:
-      return "Declines";
+      return "Refusé";
     case 3:
-      return "Accepted";
+      return "Accepté";
     case 4:
-      return "In order";
+      return "En commande";
     default:
-      return "Not generated";
+      return "Non généré";
   }
 };
 
@@ -83,7 +85,7 @@ const getModuleSubtitle = (module) => {
   const type = module.type.label;
   let price = getItemPrice(module.price);
 
-  return `Type: ${type}\nPrice: ${price} $`;
+  return `Type: ${type}\nPrix: ${price} €`;
 };
 
 const isQuotationWaitingAnswer = (quotation) => {

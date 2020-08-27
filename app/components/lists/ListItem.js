@@ -14,6 +14,7 @@ function ListItem({
   onPress,
   renderRightActions,
   style,
+  imageUri = null,
   chevron = true,
 }) {
   return (
@@ -21,7 +22,18 @@ function ListItem({
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={[styles.container, style]}>
           {IconComponent}
-          {image && <Image style={styles.image} source={image} />}
+          {(image || imageUri) && (
+            <Image
+              style={styles.image}
+              source={
+                imageUri == null
+                  ? image
+                  : {
+                      uri: imageUri,
+                    }
+              }
+            />
+          )}
           <View style={styles.detailsContainer}>
             <Text style={styles.title} numberOfLines={1}>
               {title}

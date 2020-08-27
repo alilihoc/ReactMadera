@@ -11,7 +11,7 @@ function UserScreen({ route }) {
   const user = route.params;
   const menuItems = [
     {
-      title: "Address",
+      title: "Addresse",
       subTitle: user.adress,
       icon: {
         name: "home-account",
@@ -19,7 +19,7 @@ function UserScreen({ route }) {
       },
     },
     {
-      title: "Phone",
+      title: "Télépone",
       subTitle: user.phone,
       icon: {
         name: "phone",
@@ -46,7 +46,7 @@ function UserScreen({ route }) {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              subTitle={item.subTitle ? item.subTitle : "Not Specified"}
+              subTitle={item.subTitle ? item.subTitle : "Non spécifié"}
               IconComponent={
                 <Icon
                   name={item.icon.name}

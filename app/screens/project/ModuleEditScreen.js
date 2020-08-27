@@ -8,6 +8,7 @@ import {
   SubmitButton,
   FormPicker as Picker,
 } from "../../components/forms";
+import FormImagePicker from "../../components/forms/FormImagePicker";
 import Screen from "../../components/Screen";
 import UploadScreen from "../UploadScreen";
 import AppText from "../../components/Text";
@@ -60,15 +61,16 @@ function ModuleEditScreen({ route, navigation }) {
           initialValues={{
             moduleId: module ? module.id : null,
             planId: project.plan.id,
-            name: module ? module.name : "test",
-            width: module ? module.width.toString() : "5",
-            length: module ? module.length.toString() : "5",
+            name: module ? module.name : "",
+            width: module ? module.width.toString() : "",
+            length: module ? module.length.toString() : "",
             type: module ? module.type : null,
             floor: module ? module.floor : null,
             structure: module ? module.structure : null,
             isolation: module ? module.isolation : null,
             finition: module ? module.finition : null,
             coverage: module ? module.coverage : null,
+            images: module ? (module.uri ? [module.uri] : []) : [],
           }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
@@ -78,11 +80,12 @@ function ModuleEditScreen({ route, navigation }) {
           <AppText style={styles.formHeader}>Module Information</AppText>
           <View style={styles.headerSeparator} />
 
+          <FormImagePicker name="images" />
           <FormField
             maxLength={255}
             width="100%"
             name="name"
-            placeholder="name"
+            placeholder="Nom"
             style={styles.input}
           />
 
@@ -92,7 +95,7 @@ function ModuleEditScreen({ route, navigation }) {
               width="55%"
               name="width"
               keyboardType="phone-pad"
-              placeholder="Width"
+              placeholder="Largeur"
               style={styles.input}
             />
             <FormField
@@ -100,7 +103,7 @@ function ModuleEditScreen({ route, navigation }) {
               width="35%"
               name="length"
               keyboardType="phone-pad"
-              placeholder="Length"
+              placeholder="Longueur"
               style={styles.input}
             />
           </View>
@@ -120,7 +123,7 @@ function ModuleEditScreen({ route, navigation }) {
             <Picker
               items={utils.parseData(getModulesApi.data.floor)}
               name="floor"
-              placeholder="Floor"
+              placeholder="Sol"
               width="45%"
             />
           </View>
@@ -129,7 +132,7 @@ function ModuleEditScreen({ route, navigation }) {
             <Picker
               items={utils.parseData(getModulesApi.data.coverage)}
               name="coverage"
-              placeholder="Coverage"
+              placeholder="Couverture"
               width="45%"
             />
             <Picker
@@ -156,7 +159,7 @@ function ModuleEditScreen({ route, navigation }) {
           </View>
 
           <View style={styles.buttonAdd}>
-            <SubmitButton title="Post" />
+            <SubmitButton title="Envoyer" />
           </View>
         </Form>
       </ScrollView>

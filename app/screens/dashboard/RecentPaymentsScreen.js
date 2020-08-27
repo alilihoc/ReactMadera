@@ -33,7 +33,7 @@ function RecentPaymentsScreen(props) {
                 " - " +
                 utils.getDateFormatted(item.paymentDate)
               }
-              price={"$" + utils.getItemPrice(item.amount)}
+              price={" €" + utils.getItemPrice(item.amount)}
             />
           )}
         />

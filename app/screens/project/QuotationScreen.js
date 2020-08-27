@@ -9,7 +9,6 @@ import ListItem from "../../components/lists/ListItem";
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 import utils from "../../utils/utils";
-import routes from "../../navigation/routes";
 import ActivityIndicator from "../../components/ActivityIndicator";
 
 function QuotationScreen({ route }) {
@@ -91,7 +90,7 @@ function QuotationScreen({ route }) {
 
         {/* Quotation State */}
         <ListItem
-          title={"State"}
+          title={"Etat"}
           subTitle={
             quotation == undefined
               ? null
@@ -114,7 +113,7 @@ function QuotationScreen({ route }) {
             subTitle={
               quotation == undefined
                 ? null
-                : utils.getItemPrice(quotation.prixTTC) + " $"
+                : utils.getItemPrice(quotation.prixTTC) + "€"
             }
             IconComponent={
               <Icon name="animation-outline" backgroundColor={colors.primary} />
@@ -126,7 +125,7 @@ function QuotationScreen({ route }) {
         {/* Quotation Actions */}
         {!utils.isQuotationGenerated(quotation) && (
           <View style={styles.generateButton}>
-            <AppButton title="Generate" onPress={() => createAndSavePDF()} />
+            <AppButton title="Générer" onPress={() => createAndSavePDF()} />
           </View>
         )}
 
@@ -134,12 +133,12 @@ function QuotationScreen({ route }) {
           <View style={styles.generateButton}>
             <View style={styles.ButtonsEditState}>
               <AppButton
-                title="Decline"
+                title="Refuser"
                 onPress={() => updateQuotationState(quotation.id, 2)}
                 width="49%"
               />
               <AppButton
-                title="Accept"
+                title="Accepter"
                 color="secondary"
                 onPress={() => updateQuotationState(quotation.id, 3)}
                 width="49%"

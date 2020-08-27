@@ -65,12 +65,12 @@ function LoginScreen(props) {
               autoCorrect={false}
               icon="lock"
               name="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               secureTextEntry
               textContentType="password"
               style={styles.input}
             />
-            <SubmitButton title="Login" />
+            <SubmitButton title="Se connecter" />
           </Form>
         </Screen>
       </ScrollView>

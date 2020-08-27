@@ -23,6 +23,7 @@ const AddOrEditdModule = (module, onUploadProgress) => {
       ? "/api/isolations/" + module.isolation.id
       : null,
     plan: "/api/plans/" + module.planId,
+    uri: module.images[0] == undefined ? null : module.images[0],
   };
 
   if (module.moduleId) {

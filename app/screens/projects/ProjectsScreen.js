@@ -41,7 +41,7 @@ function ListingsScreen({ navigation }) {
           <TextInput
             onChangeText={(text) => setSearch(text)}
             style={styles.searchInput}
-            placeholder="Project name"
+            placeholder="Nom du projet"
             value={search}
           />
           <Icon
@@ -66,7 +66,8 @@ function ListingsScreen({ navigation }) {
               <Card
                 title={utils.getCardName(item)}
                 subTitle={utils.getCreationDate(item)}
-                image={require("../../assets/houses/casa_index.jpg")}
+                imageUri={item.uri}
+                defaultImageSource={require("../../assets/houses/casa_index.jpg")}
                 onPress={() =>
                   navigation.navigate(routes.PROJECT_DETAILS, item)
                 }

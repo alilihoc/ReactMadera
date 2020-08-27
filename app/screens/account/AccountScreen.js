@@ -11,7 +11,7 @@ import utils from "../../utils/utils";
 
 const menuItems = [
   {
-    title: "Projects",
+    title: "Projets",
     icon: {
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
@@ -20,7 +20,7 @@ const menuItems = [
     targetScreen: routes.LISTING_PROJECTS,
   },
   {
-    title: "Customers",
+    title: "Clients",
     icon: {
       name: "account-group",
       backgroundColor: "#4b7bec",
@@ -36,7 +36,7 @@ const menuItems = [
     targetScreen: routes.MESSAGES,
   },
   {
-    title: "Dashboard",
+    title: "Tableau de bord",
     icon: {
       name: "chart-pie",
       backgroundColor: "#636e72",
@@ -44,7 +44,7 @@ const menuItems = [
     targetScreen: routes.STATS,
   },
   {
-    title: "Recent Payments",
+    title: "Paiments récents",
     icon: {
       name: "cash-usd",
       backgroundColor: "#30336b",
@@ -86,7 +86,7 @@ function AccountScreen({ navigation }) {
         />
       </View>
       <ListItem
-        title="Log Out"
+        title="Se déconnecter"
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
         onPress={() => logOut()}
       />

@@ -40,7 +40,13 @@ function ListingDetailsScreen({ route, navigation }) {
       <View style={{ display: getProjectApi.loading ? "none" : "flex" }}>
         <Image
           style={styles.image}
-          source={require("../../assets/houses/casa_index.jpg")}
+          source={
+            projectDetails.uri == null
+              ? require("../../assets/houses/casa_index.jpg")
+              : {
+                  uri: projectDetails.uri,
+                }
+          }
         />
         <View style={styles.detailsContainer}>
           <View style={styles.projectInformations}>
@@ -100,7 +106,7 @@ const getFlatListItems = (project) => {
   if (project.plan == undefined) return null;
   return [
     {
-      title: project.plan.name.capitalize(),
+      title: "Plan",
       subtitle:
         project.plan.gamme == undefined
           ? null
@@ -114,9 +120,9 @@ const getFlatListItems = (project) => {
       display: true,
     },
     {
-      title: "Quotation",
+      title: "Devis",
       subtitle:
-        "Status: " +
+        "statut: " +
         utils.getQuotationState(
           project.plan.quotation == undefined
             ? null
@@ -131,11 +137,11 @@ const getFlatListItems = (project) => {
       display: true,
     },
     {
-      title: "Payment",
+      title: "Paiement",
       subtitle:
         project.payment == undefined
           ? null
-          : "Progess: " + project.payment.percent + "%",
+          : "Avancement: " + project.payment.percent + "%",
       icon: {
         name: "credit-card-outline",
         backgroundColor: colors.primary,

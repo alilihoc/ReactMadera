@@ -59,7 +59,7 @@ function PlanEdit({ route, navigation }) {
         ]}
       >
         <ListItem
-          title={"Range"}
+          title={"Gamme"}
           subTitle={utils.getGammeLabel(getPlansApi.data)}
           chevron={false}
           IconComponent={
@@ -80,9 +80,8 @@ function PlanEdit({ route, navigation }) {
                   module: item,
                 })
               }
-              IconComponent={
-                <Icon name="animation-outline" backgroundColor="#4b7bec"></Icon>
-              }
+              imageUri={item.uri}
+              image={require("../../assets/houses/mur.jpg")}
               renderRightActions={() => (
                 <ListItemDeleteAction onPress={() => handleDelete(item)} />
               )}
@@ -94,7 +93,7 @@ function PlanEdit({ route, navigation }) {
 
         <View style={styles.buttonAdd}>
           <AppButton
-            title={"Add module"}
+            title={"Ajouter un module"}
             onPress={() =>
               navigation.navigate(routes.EDIT_MODULE, { project: project })
             }

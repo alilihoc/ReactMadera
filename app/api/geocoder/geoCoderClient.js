@@ -1,15 +1,8 @@
 import { create } from "apisauce";
-import cache from "../utils/cache";
-import authStorage from "../auth/storage";
+import cache from "../../utils/cache";
 
 const apiClient = create({
-  baseURL: "http://192.168.1.76:8000/api",
-});
-
-apiClient.addAsyncRequestTransform(async (request) => {
-  const authToken = await authStorage.getToken();
-  if (!authToken) return;
-  request.headers["Authorization"] = "Bearer " + authToken;
+  baseURL: "https://maps.googleapis.com/maps/api/geocode/",
 });
 
 const get = apiClient.get;

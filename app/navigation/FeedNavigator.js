@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ListingsScreen from "../screens/projects/ListingsScreen";
-import ListingDetailsScreen from "../screens/projects/ListingDetailsScreen";
+import ListingsScreen from "../screens/projects/ProjectsScreen";
+import ListingDetailsScreen from "../screens/projects/ProjectDetailsScreen";
 import CustomerScreen from "../screens/customer/CustomerScreen";
 import CustomerProjects from "../screens/customer/CustomerProjects";
 import PlanEdit from "../screens/project/PlanEdit";
@@ -23,14 +23,14 @@ const FeedNavigator = () => (
     <Stack.Screen
       name="CustomerProjects"
       component={CustomerProjects}
-      options={{ headerShown: true, title: "Customer projects" }}
+      options={{ headerShown: true, title: "projects client" }}
     />
     <Stack.Screen
       name="PlanEdit"
       component={PlanEdit}
       options={({ route }) => ({
         headerShown: true,
-        title: route.params.name + "'s plan",
+        title: "Plan",
       })}
     />
     <Stack.Screen
@@ -38,7 +38,7 @@ const FeedNavigator = () => (
       component={ModuleEditScreen}
       options={() => ({
         headerShown: true,
-        title: "Add module",
+        title: "Ajout module",
       })}
     />
     <Stack.Screen
@@ -46,7 +46,7 @@ const FeedNavigator = () => (
       component={QuotationScreen}
       options={() => ({
         headerShown: true,
-        title: "Quotation",
+        title: "Devis",
       })}
     />
     <Stack.Screen
@@ -54,7 +54,7 @@ const FeedNavigator = () => (
       component={PaymentScreen}
       options={() => ({
         headerShown: true,
-        title: "Payment",
+        title: "Paiement",
       })}
     />
   </Stack.Navigator>

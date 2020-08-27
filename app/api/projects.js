@@ -21,6 +21,7 @@ export const addProject = (project, onUploadProgress) => {
       name: project.name + "'s plan",
       gamme: "/api/gammes/" + project.gamme.id,
     },
+    uri: project.images[0] == undefined ? null : project.images[0],
   };
   return client.post(endpoint, data, {
     onUploadProgress: (progress) =>
